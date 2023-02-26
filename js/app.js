@@ -9,6 +9,17 @@ const loadPhone = async (searchText) => {
 const displayPhones = (phones) => {
     const phonesContainer = document.getElementById('phone-container');
     phonesContainer.textContent = ' ';
+    phones = phones.slice(0, 11)
+
+
+    // display no phones found or worng pressing
+
+    const noPhone = document.getElementById('no-found-message');
+    if (phones.length === 0) {
+        noPhone.classList.remove('d-none')
+    }
+
+    // display all phones
     phones.forEach(phone => {
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col');
