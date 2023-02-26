@@ -16,7 +16,11 @@ const displayPhones = (phones) => {
 
     const noPhone = document.getElementById('no-found-message');
     if (phones.length === 0) {
-        noPhone.classList.remove('d-none')
+        noPhone.classList.remove('d-none');
+
+    }
+    else {
+        noPhone.classList.add('d-none')
     }
 
     // display all phones
@@ -24,7 +28,7 @@ const displayPhones = (phones) => {
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col');
         phoneDiv.innerHTML = `
-        <div class="card  p-4">
+        <div class="card  p-4 mb-5">
                 <img src="${phone.image}" class="card-img-top " alt="..." />
                 <div class="card-body">
                   <h5 class="card-title">${phone.phone_name}</h5>
@@ -46,4 +50,4 @@ document.getElementById('btn-search').addEventListener('click', function () {
     const searchText = searchField.value;
     loadPhone(searchText);
 })
-loadPhone();
+// loadPhone();
