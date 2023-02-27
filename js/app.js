@@ -48,7 +48,15 @@ const displayPhones = (phones, dataLimit) => {
                     natural lead-in to additional content. This content is a
                     little bit longer.
                   </p>
-                  <button onclick ="loadPhoneDetails('$phone.slug')" href="#" class="btn btn-primary">Show details</button>
+
+
+                  <button onclick ="loadPhoneDetails('${phone.slug}')" href="#" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#phoneDetailModal">Show details</button>
+
+                  
+   
+
+
                 </div>
               </div>
     
@@ -106,11 +114,34 @@ document.getElementById('btn-see-more').addEventListener('click', function () {
 
 const loadPhoneDetails = async id => {
 
-    const url = ` https://openapi.programming-hero.com/api/phone/${id}`;
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
 
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data);
+    displayPhoneDetails(data.data);
 }
 
-// loadPhone();
+const displayPhoneDetails = (phone) => {
+    console.log(phone);
+    const modalTitle = document.getElementById('phoneDetailModalLabel');
+    modalTitle.innerText = phone.name;
+    const phoneDetails = document.getElementById('phone-details');
+    phoneDetails.innerHTML = `
+        <p>Release Date: ${phone.releaseDate ? phone.releaseDate : 'On processing'}</p>
+
+        <p>Chipset: ${phone.mainFeatures.chipSet ? phone.mainFeatures.chipSet : 'Item has no processor'
+        } </br>
+        Display: ${phone.mainFeatures.displaySize
+        } </br>
+        Memory: ${phone.mainFeatures.memory
+
+        } </br>
+        Storage: ${phone.mainFeatures.storage
+        }
+        </p>
+    
+    `;
+
+}
+loadPhone('apple');
+
